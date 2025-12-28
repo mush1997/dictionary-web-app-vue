@@ -1,5 +1,5 @@
 <script setup>
-import SearchInput from '@/components/SearchInput.vue'
+// import SearchInput from '@/components/SearchInput.vue'
 import { ref } from 'vue'
 
 import { useDataStore } from '@/stores/data'
@@ -35,7 +35,7 @@ const showOptions = ref(false)
                 </li>
             </ul>
         </nav>
-        <SearchInput />
+        <!-- <SearchInput /> -->
     </header>
 </template>
 
