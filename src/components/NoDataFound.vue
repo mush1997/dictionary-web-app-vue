@@ -4,57 +4,51 @@ const { result } = defineProps(['result'])
 
 <template>
     <div>
-        <p class="emoji">&#128533;</p>
-        <p class="title">{{ result.title }}</p>
-        <p class="msg">{{ result.message }} {{ result.resolution }}</p>
+        <p class="noDataEmoji">&#128533;</p>
+        <p class="noDataTitle">{{ result.title }}</p>
+        <p class="noDataMsg">{{ result.message }} {{ result.resolution }}</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
 div {
-    margin-top: 130px;
     text-align: center;
-
-    .emoji {
-        margin-bottom: 44px;
-        font-size: 64px;
-        line-height: 64px;
-    }
-
-    .title {
-        font-size: 20px;
-        font-weight: bold;
-        color: $medium_black;
-    }
-
-    .msg {
-        margin: 24px 0;
-        font-size: 18px;
-        line-height: 24px;
-        color: $dark_gray;
-    }
 }
 
-@media screen and (max-width:1024px) {}
+.noDataEmoji {
+    margin: 130px 0 44px 0;
+    font-size: 64px;
+    line-height: 64px;
+}
+
+.noDataTitle {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    color: $medium_black;
+}
+
+.noDataMsg {
+    margin: 24px 0;
+    font-size: 18px;
+    line-height: 24px;
+    color: $dark_gray;
+}
 
 @media screen and (max-width:500px) {
-    div {
-        margin-top: 60px;
+    .noDataEmoji {
+        margin: 60px 0 36px 0;
+        font-size: 48px;
+        line-height: 48px;
+    }
 
-        .emoji {
-            margin-bottom: 36px;
-            font-size: 48px;
-            line-height: 48px;
-        }
+    .noDataTitle {
+        font-size: 18px;
+    }
 
-        .title {
-            font-size: 18px;
-        }
-
-        .msg {
-            font-size: 14px;
-            line-height: 17px;
-        }
+    .noDataMsg {
+        font-size: 14px;
+        line-height: 17px;
     }
 }
 </style>

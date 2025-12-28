@@ -14,18 +14,9 @@
 
 @font-face {
   font-family: 'Lora';
-  font-style: normal;
   src:
     local('Lora'),
     url('@/assets/fonts/lora/Lora-VariableFont_wght.ttf') format('TrueType');
-}
-
-@font-face {
-  font-family: 'Lora';
-  font-style: italic;
-  src:
-    local('Lora Italic'),
-    url('@/assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf') format('TrueType');
 }
 
 @font-face {
@@ -41,11 +32,6 @@
 
 .lora {
   font-family: 'Lora', serif;
-}
-
-.lora-italic {
-  font-family: 'Lora', serif;
-  font-style: italic;
 }
 
 .inconsolata {

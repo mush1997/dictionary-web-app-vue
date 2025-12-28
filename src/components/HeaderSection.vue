@@ -1,15 +1,15 @@
 <script setup>
-import SearchInput from '@/components/searchInput.vue'
+import SearchInput from '@/components/SearchInput.vue'
 import { ref } from 'vue'
 
 import { useDataStore } from '@/stores/data'
-import { useModeStore } from '@/stores/mode'
 import { useFontStore } from '@/stores/font'
+import { useModeStore } from '@/stores/mode'
 import { storeToRefs } from 'pinia'
 
 const { resetData } = useDataStore()
-const { isDarkMode } = storeToRefs(useModeStore())
 const { selectedFont } = storeToRefs(useFontStore())
+const { isDarkMode } = storeToRefs(useModeStore())
 const showOptions = ref(false)
 </script>
 
@@ -24,9 +24,9 @@ const showOptions = ref(false)
                         <img class="arrow" src="@/assets/images/icon-arrow-down.svg" alt="arrow">
                     </div>
                     <div class="options" :class="{ 'show': showOptions }">
-                        <p id="inter" @click="selectedFont = 'inter'">Sans Serif</p>
-                        <p id="lora" @click="selectedFont = 'lora'">Serif</p>
-                        <p id="inconsolata" @click="selectedFont = 'inconsolata'">Mono</p>
+                        <p id="inter" @click="selectedFont = 'inter'; showOptions = false">Sans Serif</p>
+                        <p id="lora" @click="selectedFont = 'lora'; showOptions = false">Serif</p>
+                        <p id="inconsolata" @click="selectedFont = 'inconsolata'; showOptions = false">Mono</p>
                     </div>
                 </li>
                 <li class="modeSwitch">
@@ -149,6 +149,8 @@ ul {
     }
 
     .darkMode {
+        background-color: $purple;
+
         &::before {
             left: auto;
             right: 3px;
@@ -179,8 +181,6 @@ ul {
         background-color: $purple;
     }
 }
-
-@media screen and (max-width:1024px) {}
 
 @media screen and (max-width:500px) {
     .logo {

@@ -25,7 +25,6 @@ const { searchWord, finished, result } = storeToRefs(useDataStore())
 
 <style lang="scss">
 .dark {
-  //h2右側橫線顏色有變
   background-color: $black;
   color: $white;
 
@@ -45,7 +44,25 @@ const { searchWord, finished, result } = storeToRefs(useDataStore())
     }
   }
 
-  div .title {
+  .middlePart {
+    border-color: $light_black;
+  }
+
+  h2 {
+    &::after {
+      background-color: $light_black;
+    }
+
+    span {
+      background-color: $black;
+    }
+  }
+
+  .sourceLink {
+    color: $white;
+  }
+
+  .noDataTitle {
     color: $white;
   }
 }
@@ -59,6 +76,6 @@ main {
 }
 
 .fade-enter-active {
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 </style>
