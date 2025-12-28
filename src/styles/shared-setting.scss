@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src:
+    local('Inter'),
+    url('@/assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf') format('TrueType');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  src:
+    local('Lora'),
+    url('@/assets/fonts/lora/Lora-VariableFont_wght.ttf') format('TrueType');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  src:
+    local('Lora Italic'),
+    url('@/assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf') format('TrueType');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src:
+    local('Inconsolata'),
+    url('@/assets/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf') format('TrueType');
+}
+
+.inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.lora {
+  font-family: 'Lora', serif;
+}
+
+.lora-italic {
+  font-family: 'Lora', serif;
+  font-style: italic;
+}
+
+.inconsolata {
+  font-family: 'Inconsolata', monospace;
+}
+
+body {
+  padding: 60px 0;
+  background-color: $white;
+  font-weight: normal;
+  color: $medium_black;
+  display: flex;
+  justify-content: center;
+
+  #app {
+    flex-basis: 100%;
+    max-width: 736px;
+  }
+}
+
+@keyframes showing {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    padding: 60px 40px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    padding: 24px;
+  }
+}
