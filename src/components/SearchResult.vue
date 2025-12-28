@@ -152,9 +152,10 @@ const { isDarkMode } = storeToRefs(useModeStore())
         color: $dark_gray;
 
         span {
-            margin: 0 24px;
+            margin: 6px 24px;
             font-weight: bold;
             color: $purple;
+            display: block;
         }
     }
 }
@@ -255,11 +256,6 @@ const { isDarkMode } = storeToRefs(useModeStore())
         .synonyms {
             font-size: 16px;
             line-height: 20px;
-
-            span {
-                margin: 6px 0;
-                display: block;
-            }
         }
     }
 
