@@ -18,6 +18,7 @@ function goSearching() {
     }
 
     if (prevSearchWord.value === searchWord.value) { return }
+
     getWordData()
     prevSearchWord.value = searchWord.value
 }
