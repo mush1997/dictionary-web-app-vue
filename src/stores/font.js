@@ -8,8 +8,9 @@ export const useFontStore = defineStore('font', () => {
 
     watch(selectedFont, (newVal, oldVal) => {
         if (newVal === oldVal) { return }
-        body.classList.remove(oldVal)
+
         body.classList.add(newVal)
+        body.classList.remove(oldVal)
     }, { immediate: true }
     )
 

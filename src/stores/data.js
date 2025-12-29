@@ -3,13 +3,12 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useDataStore = defineStore('data', () => {
+    const hasSearched = ref(false)
     const searchWord = ref('')
     const finished = ref(null)
     const result = ref([])
 
     async function getWordData() {
-        if (!/^[a-zA-Z\s-]+$/.test(searchWord.value)) { return }
-
         try {
             finished.value = false
             const response = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord.value}`)
@@ -23,10 +22,11 @@ export const useDataStore = defineStore('data', () => {
     }
 
     function resetData() {
+        hasSearched.value = false
         searchWord.value = ''
         finished.value = null
         result.value = []
     }
 
-    return { searchWord, finished, result, getWordData, resetData }
+    return { hasSearched, searchWord, finished, result, getWordData, resetData }
 })

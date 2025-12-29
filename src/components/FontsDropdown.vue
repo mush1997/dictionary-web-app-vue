@@ -5,7 +5,12 @@ import { ref } from 'vue'
 
 const { selectedFont, selectedFontType } = storeToRefs(useFontStore())
 const showOptions = ref(false)
-const options = [{ font: 'inter', type: 'Sans Serif' }, { font: 'lora', type: 'Serif' }, { font: 'inconsolata', type: 'Mono' }]
+
+const options = [
+    { font: 'inter', type: 'Sans Serif' },
+    { font: 'lora', type: 'Serif' },
+    { font: 'inconsolata', type: 'Mono' }
+]
 
 function changeFont(font, type) {
     selectedFont.value = font

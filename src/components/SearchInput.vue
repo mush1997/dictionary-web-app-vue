@@ -2,38 +2,41 @@
 import { useDataStore } from '@/stores/data'
 import { useFontStore } from '@/stores/font'
 import { storeToRefs } from 'pinia'
-import { ref, watchEffect } from 'vue'
+import { ref, computed } from 'vue'
 
 const dataStore = useDataStore()
-const { searchWord } = storeToRefs(dataStore)
+const { hasSearched, searchWord } = storeToRefs(dataStore)
 const { getWordData } = dataStore
 const { selectedFont } = storeToRefs(useFontStore())
-const showWarning = ref(false)
 const prevSearchWord = ref('')
+const correctFormat = computed(() => /^[a-zA-Z\s-']+$/.test(searchWord.value))
+const emptyInput = computed(() => searchWord.value === '')
+const wrongInput = computed(() => !correctFormat.value && !emptyInput.value)
+
+const warningMsg = computed(() => {
+    if (hasSearched.value && emptyInput.value) {
+        return 'Whoops, can’t be empty…'
+    } else if (wrongInput.value) {
+        return 'Whoops, wrong format…'
+    } else {
+        return null
+    }
+})
 
 function goSearching() {
-    if (searchWord.value === '') {
-        showWarning.value = true
-        return
-    }
-
-    if (prevSearchWord.value === searchWord.value) { return }
-
+    hasSearched.value = true
+    if (warningMsg.value || prevSearchWord.value === searchWord.value) { return }
     getWordData()
     prevSearchWord.value = searchWord.value
 }
-
-watchEffect(() => {
-    if (searchWord.value !== '') { showWarning.value = false }
-})
 </script>
 
 <template>
-    <div class="searchInput" :class="{ 'warning': showWarning }">
-        <input :class="selectedFont" type="text" placeholder="Search for any word…" v-model.trim="searchWord"
-            @keyup.enter="goSearching()" />
+    <div class="searchInput">
+        <input :class="[selectedFont, { 'warning': warningMsg }]" type="text" placeholder="Search for any word…"
+            v-model.trim="searchWord" @keyup.enter="goSearching()" />
         <img class="searchBtn" src="@/assets/images/icon-search.svg" alt="search" @click="goSearching()">
-        <p>Whoops, can’t be empty…</p>
+        <p v-show="warningMsg">{{ warningMsg }}</p>
     </div>
 </template>
 
@@ -79,25 +82,18 @@ watchEffect(() => {
         }
     }
 
+    input.warning {
+        border-color: $warning;
+    }
+
     p {
         padding-top: 8px;
         font-size: 20px;
         line-height: 24px;
         color: $warning;
-        display: none;
         position: absolute;
         top: 100%;
         left: 0;
-    }
-}
-
-.searchInput.warning {
-    input {
-        border-color: $warning;
-    }
-
-    p {
-        display: block;
     }
 }
 

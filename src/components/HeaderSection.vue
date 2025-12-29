@@ -1,7 +1,7 @@
 <script setup>
-import SearchInput from '@/components/SearchInput.vue'
 import FontsDropdown from '@/components/FontsDropdown.vue'
 import DarkModeSwitch from '@/components/DarkModeSwitch.vue'
+import SearchInput from '@/components/SearchInput.vue'
 import { useDataStore } from '@/stores/data'
 
 const { resetData } = useDataStore()

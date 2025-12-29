@@ -1,22 +1,25 @@
 <script setup>
 import HeaderSection from '@/components/HeaderSection.vue'
 import LoadingBar from '@/components/LoadingBar.vue'
-import NoDataFound from '@/components/NoDataFound.vue'
 import SearchResult from '@/components/SearchResult.vue'
-
+import NoDataFound from '@/components/NoDataFound.vue'
 import { useDataStore } from '@/stores/data'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
-const { searchWord, finished, result } = storeToRefs(useDataStore())
+const { finished, result } = storeToRefs(useDataStore())
+const validResult = computed(() => Array.isArray(result.value) && result.value[0] && typeof result.value[0] === 'object' && result.value[0] !== null && !Array.isArray(result.value[0]))
+const noDataResult = computed(() => typeof result.value === 'object' && result.value !== null && !Array.isArray(result.value))
 </script>
 
 <template>
   <HeaderSection />
-  <main v-show="searchWord">
+  <main>
     <Transition name="fade" mode="out-in">
       <LoadingBar v-if="finished === false" />
-      <NoDataFound v-else-if="finished && result.title" :result />
-      <SearchResult v-else-if="finished && result.length" :result="result[0]" />
+      <SearchResult v-else-if="finished && validResult" :result="result[0]" />
+      <NoDataFound v-else-if="finished && noDataResult" :result />
+      <p class="fallbackMsg" v-else-if="finished">Something went wrong, please try again later...</p>
     </Transition>
   </main>
 </template>
@@ -24,51 +27,17 @@ const { searchWord, finished, result } = storeToRefs(useDataStore())
 <style lang="scss" src="@/styles/shared-setting.scss"></style>
 
 <style lang="scss">
-body.dark {
-  background-color: $black;
-  color: $white;
-
-  .options {
-    background-color: $dark_black;
-    box-shadow: 0 0 20px 1px $purple;
-  }
-
-  .searchInput input {
-    border-color: $dark_black;
-    background-color: $dark_black;
-    color: $white;
-
-    &::placeholder {
-      color: $white;
-      opacity: 1;
-    }
-  }
-
-  .middlePart {
-    border-color: $light_black;
-  }
-
-  h2 {
-    &::after {
-      background-color: $light_black;
-    }
-
-    span {
-      background-color: $black;
-    }
-  }
-
-  .sourceLink {
-    color: $white;
-  }
-
-  .noDataTitle {
-    color: $white;
-  }
-}
-
 main {
   width: 100%;
+}
+
+.fallbackMsg {
+  margin-top: 130px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  color: $dark_gray;
+  text-align: center;
 }
 
 .fade-enter-from {
@@ -77,5 +46,12 @@ main {
 
 .fade-enter-active {
   transition: opacity 0.4s ease-in-out;
+}
+
+@media screen and (max-width:500px) {
+  .fallbackMsg {
+    margin-top: 60px;
+    font-size: 20px;
+  }
 }
 </style>

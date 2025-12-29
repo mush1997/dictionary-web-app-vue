@@ -1,22 +1,49 @@
 <script setup>
-import { useModeStore } from '@/stores/mode'
+import { useDataStore } from '@/stores/data'
 import { storeToRefs } from 'pinia'
+import { computed, useTemplateRef } from 'vue'
 
 const { result } = defineProps(['result'])
-const { isDarkMode } = storeToRefs(useModeStore())
-// const audioSrc = result.value.phonetics[result.phonetics.length - 1].audio
+const { searchWord } = storeToRefs(useDataStore())
+const audioPlayer = useTemplateRef('audioPlayer')
+
+const keyword = computed(() => (result.word && typeof result.word === 'string' && result.word.length > 0) ? result.word : searchWord.value.toLowerCase())
+
+const IPA = computed(() => {
+    if (result.phonetic && typeof result.phonetic === 'string' && result.phonetic.startsWith('/')) {
+        return result.phonetic
+    }
+
+    if (result.phonetics && Array.isArray(result.phonetics) && result.phonetics.length) {
+        return result.phonetics.find((obj) => obj.text && typeof obj.text === 'string' && obj.text.startsWith('/')).text
+    }
+
+    return null
+})
+
+const audioSrc = computed(() => {
+    if (result.phonetics && Array.isArray(result.phonetics) && result.phonetics.length) {
+        return result.phonetics.find((obj) => obj.audio && typeof obj.audio === 'string' && obj.audio.endsWith('.mp3')).audio
+    }
+
+    return null
+})
+
+function playAudio() {
+    if (audioPlayer.value) { audioPlayer.value.play() }
+}
 </script>
 
 <template>
     <div class="topPart">
         <hgroup>
-            <h1>{{ result.word }}</h1>
-            <p>{{ result.phonetic }}</p>
+            <h1>{{ keyword }}</h1>
+            <p>{{ IPA }}</p>
         </hgroup>
-        <a :src="''" controls>
-            <img v-show="!isDarkMode" class="playBtn" src="@/assets/images/icon-play.svg" alt="play button">
-            <img v-show="isDarkMode" class="playBtn" src="@/assets/images/icon-play-dark-mode.svg" alt="play button">
-        </a>
+        <div class="playBtn" v-show="audioSrc" :src="audioSrc" @click="playAudio">
+            <audio :src="audioSrc" ref="audioPlayer"></audio>
+            <img src="@/assets/images/icon-play.svg" alt="play audio">
+        </div>
     </div>
 </template>
 
@@ -43,16 +70,35 @@ const { isDarkMode } = storeToRefs(useModeStore())
     }
 
     .playBtn {
-        width: 75px;
-        height: 75px;
-        display: block;
+        position: relative;
+
+        &::after {
+            content: url("@/assets/images/icon-play-hover.svg");
+            width: 75px;
+            height: 75px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+        }
+
+        img {
+            width: 75px;
+            height: 75px;
+            display: block;
+        }
     }
 }
 
 @media screen and (hover: hover) {
     .playBtn:hover {
         cursor: pointer;
-        filter: $purple;
+
+        &::after {
+            visibility: visible;
+        }
+
     }
 }
 
@@ -71,8 +117,15 @@ const { isDarkMode } = storeToRefs(useModeStore())
         }
 
         .playBtn {
-            width: 48px;
-            height: 48px;
+            &::after {
+                width: 48px;
+                height: 48px;
+            }
+
+            img {
+                width: 48px;
+                height: 48px;
+            }
         }
     }
 }
