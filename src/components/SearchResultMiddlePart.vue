@@ -163,6 +163,16 @@ li {
         margin-top: 24px;
         font-size: 16px;
         line-height: 20px;
+        display: block;
+
+        p:nth-child(2) {
+            display: block;
+        }
+
+        span {
+            margin-top: 6px;
+            display: block;
+        }
     }
 }
 </style>

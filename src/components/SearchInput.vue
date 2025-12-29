@@ -47,6 +47,7 @@ watchEffect(() => {
     .searchBtn {
         width: 16px;
         height: 16px;
+        display: block;
         position: absolute;
         top: 50%;
         right: 24px;

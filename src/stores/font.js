@@ -4,6 +4,7 @@ import { ref, watch } from 'vue'
 export const useFontStore = defineStore('font', () => {
     const body = document.body
     const selectedFont = ref('inter')
+    const selectedFontType = ref('Sans Serif')
 
     watch(selectedFont, (newVal, oldVal) => {
         if (newVal === oldVal) { return }
@@ -12,5 +13,5 @@ export const useFontStore = defineStore('font', () => {
     }, { immediate: true }
     )
 
-    return { selectedFont }
+    return { selectedFont, selectedFontType }
 })

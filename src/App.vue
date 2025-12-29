@@ -24,7 +24,7 @@ const { searchWord, finished, result } = storeToRefs(useDataStore())
 <style lang="scss" src="@/styles/shared-setting.scss"></style>
 
 <style lang="scss">
-.dark {
+body.dark {
   background-color: $black;
   color: $white;
 
