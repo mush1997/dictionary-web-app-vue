@@ -1,29 +1,32 @@
 <script setup>
 import { useDataStore } from '@/stores/data'
 import { storeToRefs } from 'pinia'
-import { computed, useTemplateRef } from 'vue'
+import { useTemplateRef, computed } from 'vue'
 
-const { result } = defineProps(['result'])
+const { word, phonetic, phoneticsArr } = defineProps(['word', 'phonetic', 'phoneticsArr'])
 const { searchWord } = storeToRefs(useDataStore())
 const audioPlayer = useTemplateRef('audioPlayer')
 
-const keyword = computed(() => (result.word && typeof result.word === 'string' && result.word.length > 0) ? result.word : searchWord.value.toLowerCase())
+const titleWord = computed(() => (word && typeof word === 'string') ? word : searchWord.value.toLowerCase())
+const validPhoneticsArr = computed(() => phoneticsArr && Array.isArray(phoneticsArr) && phoneticsArr.length)
 
 const IPA = computed(() => {
-    if (result.phonetic && typeof result.phonetic === 'string' && result.phonetic.startsWith('/')) {
-        return result.phonetic
+    if (phonetic && typeof phonetic === 'string' && phonetic.startsWith('/')) {
+        return phonetic
     }
 
-    if (result.phonetics && Array.isArray(result.phonetics) && result.phonetics.length) {
-        return result.phonetics.find((obj) => obj.text && typeof obj.text === 'string' && obj.text.startsWith('/')).text
+    if (validPhoneticsArr.value) {
+        const IPAtext = phoneticsArr.find((obj) => obj?.text && typeof obj.text === 'string' && obj.text.startsWith('/'))
+        return IPAtext ? IPAtext.text : null
     }
 
     return null
 })
 
 const audioSrc = computed(() => {
-    if (result.phonetics && Array.isArray(result.phonetics) && result.phonetics.length) {
-        return result.phonetics.find((obj) => obj.audio && typeof obj.audio === 'string' && obj.audio.endsWith('.mp3')).audio
+    if (validPhoneticsArr.value) {
+        const IPAaudio = phoneticsArr.find((obj) => obj?.audio && typeof obj.audio === 'string' && obj.audio.endsWith('.mp3'))
+        return IPAaudio ? IPAaudio.audio : null
     }
 
     return null
@@ -37,10 +40,10 @@ function playAudio() {
 <template>
     <div class="topPart">
         <hgroup>
-            <h1>{{ keyword }}</h1>
+            <h1>{{ titleWord }}</h1>
             <p>{{ IPA }}</p>
         </hgroup>
-        <div class="playBtn" v-show="audioSrc" :src="audioSrc" @click="playAudio">
+        <div class="playBtn" v-show="audioSrc" @click="playAudio">
             <audio :src="audioSrc" ref="audioPlayer"></audio>
             <img src="@/assets/images/icon-play.svg" alt="play audio">
             <img src="@/assets/images/icon-play-hover.svg" alt="play audio">
