@@ -1,10 +1,10 @@
 <script setup>
-import { useFontStore } from '@/stores/font'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-const { selectedFont, selectedFontType } = storeToRefs(useFontStore())
+const body = document.body
 const showOptions = ref(false)
+const selectedFont = ref('inter')
+const selectedFontType = ref('Sans Serif')
 
 const options = [
     { font: 'inter', type: 'Sans Serif' },
@@ -17,6 +17,14 @@ function changeFont(font, type) {
     selectedFontType.value = type
     showOptions.value = false
 }
+
+watch(selectedFont, (newVal, oldVal) => {
+    if (newVal === oldVal) { return }
+
+    body.classList.add(newVal)
+    body.classList.remove(oldVal)
+}, { immediate: true }
+)
 </script>
 
 <template>

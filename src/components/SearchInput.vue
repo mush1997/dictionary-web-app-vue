@@ -1,15 +1,13 @@
 <script setup>
 import { useDataStore } from '@/stores/data'
-import { useFontStore } from '@/stores/font'
 import { storeToRefs } from 'pinia'
 import { ref, computed } from 'vue'
 
 const dataStore = useDataStore()
 const { hasSearched, searchWord } = storeToRefs(dataStore)
 const { getWordData } = dataStore
-const { selectedFont } = storeToRefs(useFontStore())
 const prevSearchWord = ref('')
-const correctFormat = computed(() => /^[a-zA-Z\s-']+$/.test(searchWord.value))
+const correctFormat = computed(() => /^[a-zA-Z\s-']{2,}$/.test(searchWord.value))
 const emptyInput = computed(() => searchWord.value === '')
 const wrongInput = computed(() => !correctFormat.value && !emptyInput.value)
 
@@ -33,7 +31,7 @@ function goSearching() {
 
 <template>
     <div class="searchInput">
-        <input :class="[selectedFont, { 'warning': warningMsg }]" type="text" placeholder="Search for any word…"
+        <input :class="{ 'warning': warningMsg }" type="text" placeholder="Search for any word…"
             v-model.trim="searchWord" @keyup.enter="goSearching" />
         <img class="searchBtn" src="@/assets/images/icon-search.svg" alt="search" @click="goSearching">
         <p v-show="warningMsg">{{ warningMsg }}</p>
@@ -44,6 +42,7 @@ function goSearching() {
 .searchInput {
     margin: 50px 0;
     width: 100%;
+    height: calc(64px + 32px);
     position: relative;
 
     .searchBtn {
@@ -51,7 +50,7 @@ function goSearching() {
         height: 16px;
         display: block;
         position: absolute;
-        top: 50%;
+        top: 32px;
         right: 24px;
         transform: translateY(-50%);
     }
@@ -64,6 +63,7 @@ function goSearching() {
         border-radius: 10px;
         border: 1px solid $light_gray;
         background-color: $light_gray;
+        font-family: inherit;
         font-size: 20px;
         line-height: 24px;
         font-weight: bold;
@@ -87,6 +87,7 @@ function goSearching() {
 
     p {
         padding-top: 8px;
+        height: 32px;
         font-size: 20px;
         line-height: 24px;
         color: $warning;
@@ -102,6 +103,11 @@ function goSearching() {
 @media screen and (max-width:500px) {
     .searchInput {
         margin: 24px 0;
+        height: calc(48px + 28px);
+
+        .searchBtn {
+            top: 24px;
+        }
 
         input {
             padding: 14px 24px;
@@ -110,6 +116,7 @@ function goSearching() {
         }
 
         p {
+            height: 28px;
             font-size: 16px;
             line-height: 20px;
         }

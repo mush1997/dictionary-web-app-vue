@@ -45,6 +45,8 @@ body {
   color: $medium_black;
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
+  scrollbar-gutter: stable both-edges;
 
   #app {
     flex-basis: 100%;

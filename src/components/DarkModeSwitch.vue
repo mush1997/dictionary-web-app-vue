@@ -1,8 +1,16 @@
 <script setup>
-import { useModeStore } from '@/stores/mode'
-import { storeToRefs } from 'pinia'
+import { ref, watchEffect } from 'vue'
 
-const { isDarkMode } = storeToRefs(useModeStore())
+const body = document.body
+const isDarkMode = ref(false)
+
+watchEffect(() => {
+    if (isDarkMode.value) {
+        body.classList.add('dark')
+    } else {
+        body.classList.remove('dark')
+    }
+})
 </script>
 
 <template>
