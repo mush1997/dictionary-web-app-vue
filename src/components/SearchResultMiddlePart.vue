@@ -1,22 +1,19 @@
 <script setup>
+import SearchResultMiddlePartDefinitions from '@/components/SearchResultMiddlePartDefinitions.vue'
+import SearchResultMiddlePartSynonyms from '@/components/SearchResultMiddlePartSynonyms.vue'
+
 const { meanings } = defineProps(['meanings'])
 </script>
 
 <template>
     <div class="middlePart">
         <div class="meaning" v-for="meaning in meanings" :key="meaning.partOfSpeech">
-            <h2><span>{{ meaning.partOfSpeech }}</span></h2>
-            <h3>Meaning</h3>
-            <ul>
-                <li v-for="definition in meaning.definitions" :key="definition.definition">
-                    <span>{{ definition.definition }}</span>
-                    <p v-if="definition.example">“{{ definition.example }}”</p>
-                </li>
-            </ul>
-            <div class="synonyms" v-if="meaning.synonyms.length">
-                <p>Synonyms</p>
-                <p><span v-for="synonym in meaning.synonyms" :key="synonym">{{ synonym }}</span></p>
-            </div>
+            <template v-if="meaning && typeof meaning === 'object' && !Array.isArray(meaning)">
+                <h2><span>{{ meaning.partOfSpeech }}</span></h2>
+                <h3>Meaning</h3>
+                <SearchResultMiddlePartDefinitions :definitions="meaning.definitions" />
+                <SearchResultMiddlePartSynonyms :synonyms="meaning.synonyms" />
+            </template>
         </div>
     </div>
 </template>
@@ -64,59 +61,6 @@ h3 {
     color: $dark_gray;
 }
 
-li {
-    margin: 12px 0;
-    padding-left: 25px;
-    font-size: 18px;
-    line-height: 24px;
-    list-style-type: none;
-    position: relative;
-
-    &::before {
-        content: "•";
-        color: $purple;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 20px;
-    }
-
-    span {
-        padding-left: 20px;
-        display: inline-block;
-    }
-
-    p {
-        margin-top: 12px;
-        padding-left: 20px;
-        color: $dark_gray;
-    }
-}
-
-.synonyms {
-    margin-top: 64px;
-    font-size: 20px;
-    line-height: 24px;
-    color: $dark_gray;
-    display: flex;
-    flex-wrap: wrap;
-
-    p:nth-child(1) {
-        margin: 0 24px 8px 0;
-    }
-
-    p:nth-child(2) {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    span {
-        margin-right: 20px;
-        font-weight: bold;
-        color: $purple;
-    }
-}
-
 @media screen and (max-width:500px) {
     .middlePart {
         margin-bottom: 24px;
@@ -140,39 +84,6 @@ li {
         margin-bottom: 16px;
         font-size: 16px;
         line-height: 20px;
-    }
-
-    li {
-        padding-left: 0;
-        font-size: 15px;
-
-        &::before {
-            left: 0;
-        }
-
-        span {
-            padding-left: 25px;
-        }
-
-        p {
-            padding-left: 25px;
-        }
-    }
-
-    .synonyms {
-        margin-top: 24px;
-        font-size: 16px;
-        line-height: 20px;
-        display: block;
-
-        p:nth-child(2) {
-            display: block;
-        }
-
-        span {
-            margin-top: 6px;
-            display: block;
-        }
     }
 }
 </style>
