@@ -14,7 +14,7 @@ const emptyInput = computed(() => searchWord.value === '')
 const wrongInput = computed(() => !correctFormat.value && !emptyInput.value)
 
 const warningMsg = computed(() => {
-    if (hasSearched.value && emptyInput.value) {
+    if (emptyInput.value && hasSearched.value) {
         return 'Whoops, can’t be empty…'
     } else if (wrongInput.value) {
         return 'Whoops, wrong format…'
@@ -34,8 +34,8 @@ function goSearching() {
 <template>
     <div class="searchInput">
         <input :class="[selectedFont, { 'warning': warningMsg }]" type="text" placeholder="Search for any word…"
-            v-model.trim="searchWord" @keyup.enter="goSearching()" />
-        <img class="searchBtn" src="@/assets/images/icon-search.svg" alt="search" @click="goSearching()">
+            v-model.trim="searchWord" @keyup.enter="goSearching" />
+        <img class="searchBtn" src="@/assets/images/icon-search.svg" alt="search" @click="goSearching">
         <p v-show="warningMsg">{{ warningMsg }}</p>
     </div>
 </template>
@@ -44,7 +44,6 @@ function goSearching() {
 .searchInput {
     margin: 50px 0;
     width: 100%;
-    height: 64px;
     position: relative;
 
     .searchBtn {
@@ -60,7 +59,7 @@ function goSearching() {
     input {
         padding: 20px 24px;
         width: 100%;
-        height: 100%;
+        height: 64px;
         outline: none;
         border-radius: 10px;
         border: 1px solid $light_gray;
@@ -91,9 +90,6 @@ function goSearching() {
         font-size: 20px;
         line-height: 24px;
         color: $warning;
-        position: absolute;
-        top: 100%;
-        left: 0;
     }
 }
 
@@ -106,10 +102,10 @@ function goSearching() {
 @media screen and (max-width:500px) {
     .searchInput {
         margin: 24px 0;
-        height: 48px;
 
         input {
             padding: 14px 24px;
+            height: 48px;
             font-size: 16px;
         }
 

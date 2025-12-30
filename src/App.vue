@@ -8,7 +8,11 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 const { finished, result } = storeToRefs(useDataStore())
-const validResult = computed(() => Array.isArray(result.value) && result.value[0] && typeof result.value[0] === 'object' && result.value[0] !== null && !Array.isArray(result.value[0]))
+
+//the expected result should be an array consisting of one non-empty object
+const validResult = computed(() => Array.isArray(result.value) && result.value[0] && typeof result.value[0] === 'object' && !Array.isArray(result.value[0]))
+
+//the expected result should be an object
 const noDataResult = computed(() => typeof result.value === 'object' && result.value !== null && !Array.isArray(result.value))
 </script>
 

@@ -43,6 +43,7 @@ function playAudio() {
         <div class="playBtn" v-show="audioSrc" :src="audioSrc" @click="playAudio">
             <audio :src="audioSrc" ref="audioPlayer"></audio>
             <img src="@/assets/images/icon-play.svg" alt="play audio">
+            <img src="@/assets/images/icon-play-hover.svg" alt="play audio">
         </div>
     </div>
 </template>
@@ -72,21 +73,17 @@ function playAudio() {
     .playBtn {
         position: relative;
 
-        &::after {
-            content: url("@/assets/images/icon-play-hover.svg");
-            width: 75px;
-            height: 75px;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            visibility: hidden;
-        }
-
         img {
             width: 75px;
             height: 75px;
             display: block;
+        }
+
+        img:last-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
         }
     }
 }
@@ -95,7 +92,7 @@ function playAudio() {
     .playBtn:hover {
         cursor: pointer;
 
-        &::after {
+        img:last-child {
             visibility: visible;
         }
 
@@ -116,16 +113,9 @@ function playAudio() {
             line-height: 24px;
         }
 
-        .playBtn {
-            &::after {
-                width: 48px;
-                height: 48px;
-            }
-
-            img {
-                width: 48px;
-                height: 48px;
-            }
+        .playBtn img {
+            width: 48px;
+            height: 48px;
         }
     }
 }
