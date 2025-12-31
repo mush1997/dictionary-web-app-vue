@@ -43,10 +43,12 @@ body {
   background-color: $white;
   font-weight: normal;
   color: $medium_black;
-  display: flex;
-  justify-content: center;
   overflow-y: scroll;
   scrollbar-gutter: stable both-edges;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  display: flex;
+  justify-content: center;
 
   #app {
     flex-basis: 100%;
