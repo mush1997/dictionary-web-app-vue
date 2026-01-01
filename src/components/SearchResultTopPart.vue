@@ -60,8 +60,8 @@ function playAudio() {
 
     h1 {
         padding-right: 16px;
-        font-size: 64px;
-        line-height: 77px;
+        font-size: clamp(48px, 4.45vw, 64px);
+        line-height: 1.25;
         font-weight: bold;
         word-break: break-all;
     }
@@ -108,7 +108,6 @@ function playAudio() {
 
         h1 {
             font-size: 32px;
-            line-height: 40px;
         }
 
         p {
