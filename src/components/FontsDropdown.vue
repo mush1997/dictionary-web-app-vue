@@ -53,13 +53,13 @@ watch(selectedFont, (newVal, oldVal) => {
     align-items: center;
 
     span {
+        margin-right: 18px;
         font-size: 18px;
         font-weight: bold;
         line-height: 24px;
     }
 
     img {
-        margin-left: 18px;
         display: block;
     }
 }
@@ -106,14 +106,9 @@ watch(selectedFont, (newVal, oldVal) => {
         padding-right: 16px;
     }
 
-    .dropdownBtn {
-        span {
-            font-size: 14px;
-        }
-
-        img {
-            margin-left: 16px;
-        }
+    .dropdownBtn span {
+        margin-right: 16px;
+        font-size: 14px;
     }
 
     .options {

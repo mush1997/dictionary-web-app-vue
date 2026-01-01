@@ -26,6 +26,7 @@ watchEffect(() => {
     padding-left: 24px;
 
     p {
+        margin-right: 20px;
         width: 40px;
         height: 20px;
         border-radius: 10px;
@@ -47,7 +48,6 @@ watchEffect(() => {
     }
 
     img {
-        margin-left: 20px;
         width: 20px;
         vertical-align: middle;
     }
@@ -75,8 +75,8 @@ watchEffect(() => {
     .modeSwitch {
         padding-left: 16px;
 
-        img {
-            margin-left: 12px;
+        p {
+            margin-right: 12px;
         }
     }
 }

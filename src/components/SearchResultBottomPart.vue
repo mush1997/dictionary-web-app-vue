@@ -28,6 +28,7 @@ p {
 }
 
 .sourceLink {
+    margin-right: 10px;
     font-size: 14px;
     line-height: 17px;
     color: $medium_black;
@@ -36,7 +37,6 @@ p {
 }
 
 img {
-    margin-left: 10px;
     width: 12px;
     height: 12px;
     display: inline-block;
