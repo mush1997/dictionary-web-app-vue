@@ -12,12 +12,12 @@ This project is a solution to the [Dictionary web app](https://www.frontendmento
 
 ## ✨ Features
 
-- Easy to search for words with the intuitive input field
-- Real-time reminder message when the search field is empty or contains invalid characters
-- Word pronunciations for users to play, if available from the API
-- 3 types of fonts (serif/sans serif/monospace) for users to switch
+- Easy to search with the intuitive input field
+- Real-time validation reminders when search input is empty or invalid
+- Audio for word pronunciations (if available from the API)
+- 3 font options (serif/sans serif/monospace) for users to switch
 - Dark mode for users to toggle
-- Responsive UI for mobile and desktop (RWD)
+- Responsive UI for mobile, tablet and desktop (RWD)
 
 ## 📁 Structure
 
@@ -35,15 +35,15 @@ src/
 
 ### Handling Inconsistent API Data Structures
 
-Challenge: The Free Dictionary API returns phonetic data in various formats — sometimes as a top-level phonetic string, and other times nested within a phonetics array across multiple objects. This inconsistency caused potential crashes or "undefined" errors during data binding.
+Challenge: The Free Dictionary API may return phonetic data in various formats — sometimes as a top-level "phonetic" property, sometimes nested within an array across multiple objects as "text" properties, and other times missing. This inconsistency may lead to crashes or "undefined" errors during data binding.
 
-Solution: I implemented a defensive data-parsing strategy within my Vue logic. I created a computed property that prioritizes the most complete data source: it first checks the phonetics array for a non-empty text field, and falls back to the top-level phonetic property if necessary. This ensures the UI remains stable and displays the correct phonetic notation regardless of the API's response structure.
+Solution: I implemented defensive strategies to handle these inconsistencies. The logic first checks if the top-level "phonetic" property exists. If not, it checks the "phonetics" array to see if any "text" property containing valid phonetic data can be found. This ensures the UI remains stable and displays the phonetic notation only when available from the API.
 
 ### Dynamic Audio Playback
 
-Challenge: The Free Dictionary API returns multiple audio files for different dialects (UK/US), and sometimes the audio link is missing.
+Challenge: The Free Dictionary API may return multiple audio files for a single word, and sometimes the audio link is missing.
 
-Solution: I implemented a robust audio handling logic that filters the API response to find the first valid audio URL. I also added conditional rendering to the play button to prevent errors when no audio is available.
+Solution: I implemented logic to filter the API response to find the first valid audio URL. I also added conditional rendering to the play button to prevent errors when no audio is available.
 
 ## 🛠️ Technologies
 
