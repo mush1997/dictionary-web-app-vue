@@ -28,7 +28,7 @@ const { synonyms } = defineProps(['synonyms'])
     }
 
     span {
-        margin-right: 20px;
+        margin-right: 28px;
         font-weight: bold;
         color: $purple;
     }
