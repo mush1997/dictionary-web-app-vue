@@ -35,7 +35,7 @@ src/
 
 ### Handling Inconsistent API Data Structures
 
-Challenge: The Free Dictionary API may return phonetic data in various formats — sometimes as a top-level "phonetic" property, sometimes nested within an array across multiple objects as "text" properties, and other times missing. This inconsistency may lead to crashes or "undefined" errors during data binding.
+Challenge: The Free Dictionary API may return phonetic data in various formats — sometimes as a top-level "phonetic" property, sometimes nested within an array as "text" properties of multiple objects, and other times missing. This inconsistency may lead to crashes or "undefined" errors during data binding.
 
 Solution: I implemented defensive strategies to handle these inconsistencies. The logic first checks if the top-level "phonetic" property exists. If not, it checks the "phonetics" array to see if any "text" property containing valid phonetic data can be found. This ensures the UI remains stable and displays the phonetic notation only when available from the API.
 
