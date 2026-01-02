@@ -39,7 +39,7 @@ Challenge: The Free Dictionary API may return phonetic data in various formats â
 
 Solution: I implemented defensive strategies to handle these inconsistencies. The logic first checks if the top-level "phonetic" property exists. If not, it checks the "phonetics" array to see if any "text" property containing valid phonetic data can be found. This ensures the UI remains stable and displays the phonetic notation only when available from the API.
 
-### Dynamic Audio Playback
+### Dynamic Audio Files
 
 Challenge: The Free Dictionary API may return multiple audio files for a single word, and sometimes the audio link is missing.
 
