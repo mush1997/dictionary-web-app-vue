@@ -8,7 +8,7 @@ Live Site URL: [https://dictionary-web-app-vue.vercel.app/](https://dictionary-w
 
 ## 📝 Description
 
-This project is a solution to the [Dictionary web app](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL) challenge on _Frontend Mentor_. Using the [Free Dictionary API](https://dictionaryapi.dev/), this app allows users to look up word definitions, synonyms, usage examples, etc.
+This project is a solution to the [Dictionary web app](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL) challenge on _Frontend Mentor_. Using the [Free Dictionary API](https://dictionaryapi.dev/), this app enables users to look up word definitions, synonyms, usage examples, and more.
 
 ## ✨ Features
 
@@ -16,7 +16,7 @@ This project is a solution to the [Dictionary web app](https://www.frontendmento
 - Real-time validation reminders when search input is empty or invalid
 - Audio for word pronunciations (if available from the API)
 - 3 font options (serif/sans serif/monospace) for users to switch
-- Dark mode for users to toggle
+- Dark/Light mode for users to toggle
 - Responsive UI for mobile, tablet and desktop (RWD)
 
 ## 📁 Structure
@@ -39,7 +39,7 @@ Challenge: The Free Dictionary API may return phonetic data in various formats �
 
 Solution: I implemented defensive strategies to handle these inconsistencies. The logic first checks if the top-level "phonetic" property exists. If not, it checks the "phonetics" array to see if any "text" property containing valid phonetic data can be found. This ensures the UI remains stable and displays the phonetic notation only when available from the API.
 
-### Dynamic Audio Files
+### Multiple Audio Files
 
 Challenge: The Free Dictionary API may return multiple audio files for a single word, and sometimes the audio link is missing.
 
