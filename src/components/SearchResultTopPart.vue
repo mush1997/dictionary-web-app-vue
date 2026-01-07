@@ -41,7 +41,7 @@ function playAudio() {
     <div class="topPart">
         <hgroup>
             <h1>{{ titleWord }}</h1>
-            <p>{{ IPA }}</p>
+            <p v-show="IPA">{{ IPA }}</p>
         </hgroup>
         <div class="playBtn" v-show="audioSrc" @click="playAudio">
             <audio :src="audioSrc" ref="audioPlayer"></audio>
