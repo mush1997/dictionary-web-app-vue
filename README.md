@@ -43,7 +43,7 @@ src/
 
 **Challenge:** The Free Dictionary API may return multiple audio files for a single word, and sometimes the audio link is missing.
 
-**Solution:** I implemented logic to filter the API response to find the first valid audio URL. I also added conditional rendering to the play button to prevent errors when no audio is available.
+**Solution:** I implemented logic to filter the API response to find the first valid audio URL. I also added conditional rendering to the play button to make sure it is only visible when the audio is available.
 
 ## 🛠️ Technologies
 
