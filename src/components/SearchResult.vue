@@ -14,9 +14,9 @@ const validSourceUrls = computed(() => Array.isArray(result.sourceUrls) && resul
 </script>
 
 <template>
-    <div class="transitionWrapper">
-        <SearchResultTopPart :word=result.word :phonetic=result.phonetic :phoneticsArr=result.phonetics />
-        <SearchResultMiddlePart v-show="validMeanings" :meanings="result.meanings" />
-        <SearchResultBottomPart v-show="validSourceUrls" :source="result.sourceUrls[0]" />
-    </div>
+  <div class="transitionWrapper">
+    <SearchResultTopPart :word="result.word" :phonetic="result.phonetic" :phoneticsArr="result.phonetics" />
+    <SearchResultMiddlePart v-show="validMeanings" :meanings="result.meanings" />
+    <SearchResultBottomPart v-show="validSourceUrls" :source="result.sourceUrls[0]" />
+  </div>
 </template>

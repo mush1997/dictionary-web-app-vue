@@ -52,7 +52,7 @@ main {
   transition: opacity 0.4s ease-in-out;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width: 500px) {
   .fallbackMsg {
     margin-top: 60px;
     font-size: 20px;

@@ -8,54 +8,54 @@ const { resetData } = useDataStore()
 </script>
 
 <template>
-    <header>
-        <nav>
-            <img class="logo" src="/logo.svg" alt="logo" @click="resetData">
-            <ul>
-                <FontsDropdown />
-                <DarkModeSwitch />
-            </ul>
-        </nav>
-        <SearchInput />
-    </header>
+  <header>
+    <nav>
+      <img class="logo" src="/logo.svg" alt="logo" @click="resetData" />
+      <ul>
+        <FontsDropdown />
+        <DarkModeSwitch />
+      </ul>
+    </nav>
+    <SearchInput />
+  </header>
 </template>
 
 <style lang="scss" scoped>
 header {
-    width: 100%;
+  width: 100%;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-    width: 32px;
-    display: block;
+  width: 32px;
+  display: block;
 }
 
 ul {
-    display: flex;
+  display: flex;
 
-    li {
-        height: 32px;
-        list-style: none;
-        display: flex;
-        align-items: center;
-    }
+  li {
+    height: 32px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
 }
 
 @media screen and (hover: hover) {
-    .logo:hover {
-        cursor: pointer;
-    }
+  .logo:hover {
+    cursor: pointer;
+  }
 }
 
-@media screen and (max-width:500px) {
-    .logo {
-        width: 28px;
-    }
+@media screen and (max-width: 500px) {
+  .logo {
+    width: 28px;
+  }
 }
 </style>
