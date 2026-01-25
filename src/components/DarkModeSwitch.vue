@@ -49,7 +49,7 @@ watchEffect(() => {
 
     img {
         width: 20px;
-        vertical-align: middle;
+        display: block;
     }
 }
 

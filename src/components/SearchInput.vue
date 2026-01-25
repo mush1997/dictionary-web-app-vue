@@ -31,7 +31,7 @@ function goSearching() {
 
 <template>
     <div class="searchInput">
-        <input :class="{ 'warning': warningMsg }" type="text" placeholder="Search for any word…"
+        <input :class="{ 'warning': !!warningMsg }" type="text" placeholder="Search for any word…"
             v-model.trim="searchWord" @keyup.enter="goSearching" />
         <img class="searchBtn" src="@/assets/images/icon-search.svg" alt="search" @click="goSearching">
         <p v-show="warningMsg">{{ warningMsg }}</p>
@@ -68,7 +68,6 @@ function goSearching() {
         line-height: 24px;
         font-weight: bold;
         color: $medium_black;
-        position: relative;
 
         &::placeholder {
             color: $medium_black;

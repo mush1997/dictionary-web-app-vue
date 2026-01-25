@@ -38,7 +38,7 @@ h2 {
 
     &::after {
         content: "";
-        width: calc(100%);
+        width: 100%;
         height: 1px;
         background-color: $medium_gray;
         display: block;
