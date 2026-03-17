@@ -31,8 +31,6 @@ watchEffect(() => {
     height: 20px;
     border-radius: 10px;
     background-color: $dark_gray;
-    display: inline-block;
-    vertical-align: middle;
     position: relative;
 
     &::before {

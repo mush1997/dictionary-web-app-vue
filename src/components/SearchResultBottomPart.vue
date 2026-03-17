@@ -39,7 +39,6 @@ p {
 img {
   width: 12px;
   height: 12px;
-  display: inline-block;
   vertical-align: middle;
 }
 
