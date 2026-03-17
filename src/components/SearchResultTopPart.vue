@@ -8,7 +8,7 @@ const { searchWord } = storeToRefs(useDataStore())
 const audioPlayer = useTemplateRef('audioPlayer')
 
 const titleWord = computed(() => (word && typeof word === 'string') ? word : searchWord.value.toLowerCase())
-const validPhoneticsArr = computed(() => phoneticsArr && Array.isArray(phoneticsArr) && phoneticsArr.length)
+const validPhoneticsArr = computed(() => Array.isArray(phoneticsArr) && phoneticsArr.length)
 
 const IPA = computed(() => {
   if (phonetic && typeof phonetic === 'string' && phonetic.startsWith('/')) {

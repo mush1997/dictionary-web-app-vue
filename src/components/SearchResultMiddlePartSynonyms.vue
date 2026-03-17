@@ -3,7 +3,7 @@ const { synonyms } = defineProps(['synonyms'])
 </script>
 
 <template>
-  <div class="synonyms" v-if="synonyms && Array.isArray(synonyms) && synonyms.length">
+  <div class="synonyms" v-if="Array.isArray(synonyms) && synonyms.length">
     <p>Synonyms</p>
     <p>
       <span v-for="synonym in synonyms" :key="synonym">{{ synonym }}</span>

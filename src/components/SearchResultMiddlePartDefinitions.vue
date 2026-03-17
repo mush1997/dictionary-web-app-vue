@@ -3,7 +3,7 @@ const { definitions } = defineProps(['definitions'])
 </script>
 
 <template>
-  <ul v-if="definitions && Array.isArray(definitions) && definitions.length">
+  <ul v-if="Array.isArray(definitions) && definitions.length">
     <li v-for="def in definitions" :key="def.definition">
       <span>{{ def.definition }}</span>
       <p v-if="def.example">“{{ def.example }}”</p>
